@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Redirect, Route} from 'react-router-dom';
+import Auth from './auth0/Auth';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NavBar from './navbar/Navbar';
+
+import HomePage from './pages/Home';
+import ProfilePage from './pages/Profile';
+import Callback from './pages/callback';
+
+
+class  App extends React.Component  {
+  constructor(props){
+    super(props);
+    this.auth = new Auth(this.props.history)
+  }
+  render(){
+    const isSigned = this.auth.isAutheticated();
+    return (
+      <div className="App">
+        <NavBar  auth={this.auth} isSigned={isSigned} />
+        <Route exact path='/' render={props => <HomePage auth={this.auth} {...props} />}/>
+        <Route  path='/callback' render={props => <Callback auth={this.auth} {...props} />}/>
+        <Route path='/profile' render={props => isSigned ? <ProfilePage auth={this.auth} {...props}/> : <Redirect to='/'/>}/>
+      </div>
+    );
+  }
 }
 
 export default App;

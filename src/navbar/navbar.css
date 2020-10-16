@@ -1,0 +1,21 @@
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom right, #f0582a, #eb0685);
+    display: flex;
+}
+
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0rem 2rem;
+    color: white;   
+}
+
+.link:hover {
+    color: rgb(89, 81, 99);
+}

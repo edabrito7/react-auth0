@@ -11,6 +11,13 @@ const NavBar = ({auth,isSigned}) => {
                 <Link className='link' to='/'>Home</Link>
                 <Link className='link' to='/profile'>Profile</Link>
                 <Link className='link' to='/profile'>Sign In</Link>
+                <Link className='link' to='/public'>Public</Link>
+                { isSigned ? 
+                    <Link className='link' to='/private'>Private</Link> 
+                    : 
+                    null
+                }
+                
                 <li className='link'>
                     <button onClick={isSigned ? logout : login}>
                         {isSigned ? "Log Out" : "Log In"}

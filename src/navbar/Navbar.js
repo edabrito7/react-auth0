@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import './navbar.css';
 
-const NavBar = ({auth,isSigned}) => {
+const NavBar = ({auth,isSigned, userHasScopes}) => {
     const {login, logout} = auth;
     return(
         <nav>
@@ -14,6 +14,11 @@ const NavBar = ({auth,isSigned}) => {
                 <Link className='link' to='/public'>Public</Link>
                 { isSigned ? 
                     <Link className='link' to='/private'>Private</Link> 
+                    : 
+                    null
+                }
+                { isSigned  ? 
+                    <Link className='link' to='/courses'>Courses</Link> 
                     : 
                     null
                 }

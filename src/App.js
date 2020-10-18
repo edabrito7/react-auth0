@@ -8,6 +8,7 @@ import HomePage from './pages/Home';
 import ProfilePage from './pages/Profile';
 import Public from './pages/public';
 import Private from './pages/private';
+import Courses from './pages/courses';
 import Callback from './pages/callback';
 
 
@@ -25,6 +26,7 @@ class  App extends React.Component  {
         <Route  path='/callback' render={props => <Callback auth={this.auth} {...props} />}/>
         <Route path='/public' render={props => <Public/>}/>
         <Route path='/private' render={props => isSigned ? <Private auth={this.auth} {...props}/> : this.auth.login()}/>
+        <Route path='/courses' render={props => isSigned && this.auth.userHasScopes(["read:courses"]) ? <Courses auth={this.auth} {...props}/> : this.auth.login()}/>
         <Route path='/profile' render={props => isSigned ? <ProfilePage auth={this.auth} {...props}/> : <Redirect to='/'/>}/>
       </div>
     );
